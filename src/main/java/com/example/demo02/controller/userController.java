@@ -104,7 +104,7 @@ public class userController
         // 查找用户
         Users existingUser = userMapper.findByPhone(user.getuPhone());
         if (existingUser == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("该手机号未进行注册");
+            return ResponseEntity.ok("该手机号未进行注册");
         }
 
         // 更新密码
@@ -112,7 +112,7 @@ public class userController
         if (result > 0) {
             return ResponseEntity.ok("密码更新成功");
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("密码更新失败");
+            return ResponseEntity.ok("密码更新失败");
         }
     }
 
