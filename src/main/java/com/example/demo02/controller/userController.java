@@ -55,7 +55,7 @@ public class userController
         return userMapper.findByUid(user.getUid());
     }
 
-    // 注册接口：如果有重复的手机号，不允许重复注册
+    // 注册
     @PostMapping("/register")
     public String register(@RequestBody Users user) {
         Users existingUser = userMapper.findByPhone(user.getuPhone());
@@ -66,13 +66,8 @@ public class userController
         return "注册成功";
     }
 
-    // 更新用户信息（）
-//    @PutMapping("/update")
-//    public Integer updateUser(@RequestBody Users user) {
-//        return userMapper.updateById(user);
-//    }
 
-    // 修改用户余额接口：根据用户id，修改用户余额
+    // 修改用户余额
     /**
      * @param user uid用户编号
      * @param user uBalance金额
@@ -90,7 +85,7 @@ public class userController
         }
     }
 
-    // 修改用户负债接口：根据用户id，修改用户负债
+    // 修改用户负债
     @PutMapping("/update/liability")
     public ResponseEntity<String> updateLiability(@RequestBody Users user) {
         Users newUser = userMapper.selectById(user.getUid());
@@ -100,6 +95,24 @@ public class userController
             return ResponseEntity.ok("负债更新成功");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("用户不存在或更新失败");
+        }
+    }
+
+    // 修改用户密码接口
+    @PostMapping("/update/password")
+    public ResponseEntity<String> updatePassword(@RequestBody Users user) {
+        // 查找用户
+        Users existingUser = userMapper.findByPhone(user.getuPhone());
+        if (existingUser == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("该手机号未进行注册");
+        }
+
+        // 更新密码
+        int result = userMapper.updatePassword(user.getuPhone(), user.getuAccountPassword());
+        if (result > 0) {
+            return ResponseEntity.ok("密码更新成功");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("密码更新失败");
         }
     }
 

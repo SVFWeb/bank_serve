@@ -11,8 +11,7 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface UserMapper extends BaseMapper<Users>
 {
-//    @Select("SELECT * FROM users WHERE u_phone = #{uPhone} AND u_account_password = #{uAccountPassword}")
-//    Users findByPhoneAndPassword(Users users);
+
     @Select("SELECT * FROM users WHERE u_phone = #{uPhone} AND u_account_password = #{uAccountPassword}")
     Users findByPhoneAndPassword(Users users);
 
@@ -36,4 +35,8 @@ public interface UserMapper extends BaseMapper<Users>
     // 更新用户负债
     @Update("UPDATE users SET u_liability = u_liability + #{uLiability} WHERE uid = #{uid}")
     int updateLiability(Users user);
+
+    // 更新用户密码
+    @Update("UPDATE users SET u_account_password = #{newPassword} WHERE u_phone = #{uPhone}")
+    int updatePassword(@Param("uPhone") String uPhone, @Param("newPassword") String newPassword);
 }
