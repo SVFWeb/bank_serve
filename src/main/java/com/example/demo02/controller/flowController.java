@@ -33,4 +33,15 @@ public class flowController {
         List<Flow> flows = flowMapper.getAllFlows();
         return ResponseEntity.ok(flows);
     }
+
+    // 根据 id 获取所有相关数据接口
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Flow>> getFlowsById(@PathVariable String id) {
+        List<Flow> flows = flowMapper.getFlowsById(id);
+        if (flows != null && !flows.isEmpty()) {
+            return ResponseEntity.ok(flows);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
 }

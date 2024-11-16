@@ -30,4 +30,17 @@ public interface FlowMapper extends BaseMapper<Flow> {
             @Result(property = "remark", column = "remark")
     })
     List<Flow> getAllFlows();
+
+    // 根据 id 获取所有相关数据
+    @Select("SELECT time, id, user_name, financial_type, income_money, compute_money, remark FROM flow WHERE id = #{id}")
+    @Results({
+            @Result(property = "time", column = "time"),
+            @Result(property = "id", column = "id"),
+            @Result(property = "userName", column = "user_name"),
+            @Result(property = "financialType", column = "financial_type"),
+            @Result(property = "incomeMoney", column = "income_money"),
+            @Result(property = "computeMoney", column = "compute_money"),
+            @Result(property = "remark", column = "remark")
+    })
+    List<Flow> getFlowsById(String id);
 }
