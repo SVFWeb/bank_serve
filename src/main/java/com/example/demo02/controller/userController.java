@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -115,5 +116,13 @@ public class userController
             return ResponseEntity.ok("密码更新失败");
         }
     }
+
+    // 获取所有用户的 uid 和 user_name
+    @GetMapping("/all")
+    public ResponseEntity<List<Map<String, Object>>> getAllUsersUidAndName() {
+        List<Map<String, Object>> users = userMapper.getAllUsersUidAndName();
+        return ResponseEntity.ok(users);
+    }
+
 
 }
