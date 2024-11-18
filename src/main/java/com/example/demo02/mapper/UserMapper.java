@@ -40,11 +40,13 @@ public interface UserMapper extends BaseMapper<Users>
     @Update("UPDATE users SET u_account_password = #{newPassword} WHERE u_phone = #{uPhone}")
     int updatePassword(@Param("uPhone") String uPhone, @Param("newPassword") String newPassword);
 
-    // 获取所有用户的 uid 和 user_name
-    @Select("SELECT uid, user_name FROM users")
+
+    // 获取除指定 id 外的其他用户的 uid、user_name 和 u_balance
+    @Select("SELECT uid, user_name, u_balance FROM users WHERE uid != #{id}")
     @Results({
             @Result(property = "uid", column = "uid"),
-            @Result(property = "userName", column = "user_name")
+            @Result(property = "user_name", column = "user_name"),
+            @Result(property = "u_balance", column = "u_balance")
     })
-    List<Map<String, Object>> getAllUsersUidAndName();
+    List<Map<String, Object>> getUsersExceptId(String id);
 }

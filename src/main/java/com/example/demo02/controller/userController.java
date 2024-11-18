@@ -121,11 +121,15 @@ public class userController
         }
     }
 
-    // 获取所有用户的 uid 和 user_name
-    @GetMapping("/all")
-    public ResponseEntity<List<Map<String, Object>>> getAllUsersUidAndName() {
-        List<Map<String, Object>> users = userMapper.getAllUsersUidAndName();
-        return ResponseEntity.ok(users);
+    // 根据 id 获取除该 id 外的其他用户的 uid、user_name 和 u_balance
+    @GetMapping("/except/{id}")
+    public ResponseEntity<Object> getUsersExceptId(@PathVariable String id) {
+        List<Map<String, Object>> users = userMapper.getUsersExceptId(id);
+        if (users == null || users.isEmpty()) {
+            return ResponseEntity.ok("暂无数据");
+        } else {
+            return ResponseEntity.ok(users);
+        }
     }
 
 
