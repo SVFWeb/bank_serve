@@ -89,9 +89,13 @@ public class userController
     // 修改用户负债
     @PutMapping("/update/liability")
     public ResponseEntity<String> updateLiability(@RequestBody Users user) {
+
         Users newUser = userMapper.selectById(user.getUid());
+
         newUser.setuLiability(newUser.getuLiability()+user.getuLiability());
+
         int result = userMapper.updateById(newUser);
+
         if (result > 0) {
             return ResponseEntity.ok("负债更新成功");
         } else {

@@ -31,9 +31,9 @@ public interface ContractMapper extends BaseMapper<contract> {
     //根据cid对某个借款金额进行修改
     // @Update("UPDATE contract SET uid = #{uid}, c_name = #{cName}, c_loan_amount = #{cLoanAmount}, c_time = #{cTime} WHERE cid = #{cid}")
     //    void updateContractByCid(Contract contract);
-    @Update("UPDATE contract SET  c_loan_amount = c_loan_amount + #{cLoanAmount} WHERE cid = #{cid} ")
+    @Update("UPDATE contract SET  c_loan_amount = c_loan_amount - #{cLoanAmount} WHERE cid = #{cid} ")
 
-        int updateLoanAmount(@Param("cid") String cid, @Param("cLoanAmount") Integer cLoanAmount);
+        int updateLoanAmount(@Param("cid") String cid, @Param("cLoanAmount") int cLoanAmount);
 
 
     //添加一条合同

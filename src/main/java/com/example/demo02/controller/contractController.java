@@ -52,7 +52,11 @@ public class contractController {
     //根据cid对某一条借款合同的金额进行修改
     //http://localhost:8080/cont/updateAmount?cid=1&cLoanAmount=4000
     @PostMapping("/updateAmount")
-    public ResponseEntity<Integer> updateLoanAmount(@RequestParam String cid, @RequestParam Integer cLoanAmount) {
+    public ResponseEntity<Integer> updateLoanAmount(@RequestParam String cid, @RequestParam int cLoanAmount) {
+
+        System.out.println(cLoanAmount);
+        System.out.println("前端金额");
+
         int rowsAffected = contractMapper.updateLoanAmount(cid, cLoanAmount);
         return ResponseEntity.ok(rowsAffected);
     }
