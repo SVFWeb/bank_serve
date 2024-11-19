@@ -16,8 +16,7 @@ import java.util.Map;
 @RequestMapping("/user")
 @CrossOrigin
 @Validated
-public class userController
-{
+public class userController {
     @Autowired
     private UserMapper userMapper;
 
@@ -69,15 +68,16 @@ public class userController
 
 
     // 修改用户余额
+
     /**
      * @param user uid用户编号
      * @param user uBalance金额
-    * */
+     */
     @PutMapping("/update/balance")
     public ResponseEntity<String> updateBalance(@RequestBody Users user) {
         Users newUser = userMapper.selectById(user.getUid());
-        newUser.setuBalance(newUser.getuBalance()+user.getuBalance());
-        if(newUser.getuBalance()<0) return ResponseEntity.ok("余额不足");
+        newUser.setuBalance(newUser.getuBalance() + user.getuBalance());
+        if (newUser.getuBalance() < 0) return ResponseEntity.ok("余额不足");
         int result = userMapper.updateById(newUser);
         if (result > 0) {
             return ResponseEntity.ok("余额更新成功");
@@ -92,7 +92,7 @@ public class userController
 
         Users newUser = userMapper.selectById(user.getUid());
 
-        newUser.setuLiability(newUser.getuLiability()+user.getuLiability());
+        newUser.setuLiability(newUser.getuLiability() + user.getuLiability());
 
         int result = userMapper.updateById(newUser);
 
@@ -132,5 +132,9 @@ public class userController
         }
     }
 
-
+    // 更新用户信息（）
+    @PutMapping("/update")
+    public Integer updateUser(@RequestBody Users user) {
+        return userMapper.updateById(user);
+    }
 }
