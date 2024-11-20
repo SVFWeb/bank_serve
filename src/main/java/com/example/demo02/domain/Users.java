@@ -16,6 +16,24 @@ public class Users {
     private  Integer uPaymentPassword;
     private  Double uBalance;
     private  Double uLiability;
+    private String email;
+    private String wechat;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
+    }
 
     public String getUid() {
         return uid;
