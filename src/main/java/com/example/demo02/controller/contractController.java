@@ -54,9 +54,6 @@ public class contractController {
     @PostMapping("/updateAmount")
     public ResponseEntity<Integer> updateLoanAmount(@RequestParam String cid, @RequestParam int cLoanAmount) {
 
-        System.out.println(cLoanAmount);
-        System.out.println("前端金额");
-
         int rowsAffected = contractMapper.updateLoanAmount(cid, cLoanAmount);
         return ResponseEntity.ok(rowsAffected);
     }
